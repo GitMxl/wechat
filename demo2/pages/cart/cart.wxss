@@ -1,0 +1,109 @@
+page{
+  background: #F4F4F4;
+  position: relative;
+}
+.shopList{
+  width: 100%;
+  height: 235rpx;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #8e8e8e;
+  background: #fff;
+}
+.shopListLast{
+  margin: 0 0 87rpx 0;
+}
+.icon{
+  width: 15%;
+  text-align: center;
+}
+.shopImg{
+  width: 25%;
+}
+.shopImg image{
+  width: 180rpx;
+  height: 200rpx;
+}
+.shopName{
+  font-size: 28rpx;
+  margin-bottom: 20rpx;
+}
+.shopMessage{
+  width: 45%;
+}
+.shopPirce{
+  color: red;
+  margin: 0 0 10rpx 0;
+  font-size: 30rpx;
+}
+.operation{
+  display: inline-block;
+  width: 65rpx;
+  font-size: 40rpx;
+  text-align: center;
+  line-height: 65rpx;
+  background: #FBFBFB;
+  vertical-align: middle;
+}
+.num{
+  display: inline-block;
+  width: 90rpx;
+  background: #F4F4F4;
+  font-size: 30rpx;
+  line-height: 65rpx;
+  text-align: center;
+  vertical-align: middle;
+}
+.shopDelete{
+  width: 15%;
+  margin: 0 0  80rpx 0;
+}
+.shopDelete image{
+  width: 56rpx;
+}
+
+.allShop{
+  width: 100%;
+  display: flex;
+  text-align: center;
+  height: 87rpx;
+  background: #fff;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+.allIcon{
+  width: 25%;
+  display: flex;
+  align-items: center;
+}
+.allIcon icon,.allIcon text{
+  vertical-align: middle;
+}
+.allIcon icon{
+  display: block;
+  margin: 0 0 0 30rpx;
+}
+.allIcon text{
+  margin: 0 0 0 15rpx;
+}
+.allPrice{
+  width: 45%;
+  line-height: 87rpx;
+}
+.totalPrice{
+  color: red;
+  font-size: 28rpx;
+}
+.cleanCart{
+  width: 30%;
+  background: #405F80;
+  color: #fff;
+  line-height: 87rpx;
+  font-size: 30rpx;
+}
+
+.empty{
+  text-align: center;
+}
