@@ -20,13 +20,14 @@
 </view>
 <!-- 地图 -->
 <view class="container">
-  <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" markers="{{markers}}" polyline="{{polyline}}" include-points="{{points}}"  bindmarkertap="markerTap"show-location enable-scroll enable-zoom >
+  <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" markers="{{markers}}" polyline="{{polyline}}" include-points="{{points}}" bindmarkertap="markerTap" show-location enable-scroll enable-zoom enable-rotate show-scale show-compass>
     <cover-view>
       <cover-image src="../../image/location.png" bindtap="location"></cover-image>
     </cover-view>
+
   </map>
   <!-- 滑块 -->
-  <view class="slider">
-    <slider min="3" max="20" value="{{scale}}" block-size="20" show-value bindchange="sliderTap"></slider>
+  <view class="slider" z-index="2">
+    <slider min="3" z-index="2" max="20" value="{{scale}}" block-size="20" show-value bindchange="sliderTap"></slider>
   </view>
 </view>

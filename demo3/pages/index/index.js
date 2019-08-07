@@ -14,37 +14,23 @@ Page({
     polyline: [], //线路
     points: [], //用于显示搜索后的marker
     inpVal: '',
-    mode: 'driving',//出行方式（共四种）
+    mode: 'driving', //出行方式（共四种）
     city: '',
-    searchList:[],
-    showList:false,
-    province:''
+    searchList: [],
+    showList: false,
+    province: ''
   },
   // 定位
   showGetLocation() {
     let that = this;
     // 微信API：定位
     wx.getLocation({
+      type: 'gcj02', 
+      altitude:true,
       success: function(res) {
-        that.setData({
-          longitude: res.longitude,
-          latitude: res.latitude,
-          scale: 16,
-          points: [{
-            longitude: res.longitude,
-            latitude: res.latitude,
-          }],
-          markers: [{
-            id: 0,
-            longitude: res.longitude,
-            latitude: res.latitude,
-            iconPath: '../../image/address.png',
-            width: 30
-          }]
-        })
         let latitude = res.latitude,
           longitude = res.longitude;
-          // 腾讯API:坐标到坐标所在位置的文字描述的转换
+        // 腾讯API:坐标到坐标所在位置的文字描述的转换
         qqmapsdk.reverseGeocoder({
           location: {
             latitude: latitude,
@@ -53,8 +39,25 @@ Page({
           success(res) {
             console.log(res)
             that.setData({
-              province:res.result.address_component.province,
-              city: res.result.address_component.city
+              province: res.result.address_component.province,
+              city: res.result.address_component.city,
+              points: [{
+                longitude: res.result.location.lng,
+                latitude: res.result.location.lat,
+              }],
+              longitude: res.result.location.lng,
+              latitude :res.result.location.lat,
+              markers: [{
+                id: 0,
+                title: res.result.formatted_addresses.rough,
+                longitude: res.result.location.lng,
+                latitude: res.result.location.lat,
+                callout: {
+                  content: res.result.formatted_addresses.rough,
+                  color: '#0e0e0e',
+                  display: 'BYCLICK'
+                },
+              }]
             })
           },
           fail(res) {
@@ -68,9 +71,9 @@ Page({
   //图标定位
   location: function(e) {
     this.setData({
-      markers:[],
-      polyline:[],
-      inpVal:''
+      markers: [],
+      polyline: [],
+      inpVal: ''
     })
     this.showGetLocation();
   },
@@ -82,28 +85,27 @@ Page({
     })
   },
   // 下拉选择事件
-  downText:function(e){
-    console.log(e)
+  downText: function(e) {
     let txt = e.target.dataset.title;
-    console.log(txt)
     this.setData({
-      showList:false,
-      inpVal:txt
+      showList: false,
+      inpVal: txt
     })
   },
   // input的value值
   inputValue: function(e) {
-    let that =this;
+    let that = this;
     let val = e.detail.value;
-    console.log(val.length)
-    if (val.length > 0){
+    if (val.length > 0) {
       this.setData({
-        showList:true
+        showList: true
       })
-    }else{
+    } else {
       this.setData({
-        showList: false
+        showList: false,
+        inpVal:""
       })
+      return ;
     }
     let lat = this.data.latitude,
       log = this.data.longitude,
@@ -112,7 +114,7 @@ Page({
     this.setData({
       inpVal: val
     })
-    	// 腾讯API：用于获取输入关键字的补完与提示
+    // 腾讯API：用于获取输入关键字的补完与提示
     qqmapsdk.getSuggestion({
       keyword: val,
       region: city,
@@ -130,7 +132,7 @@ Page({
           });        
         }
         that.setData({
-          searchList:sug
+          searchList: sug
         })
       },
       fail(res) {
@@ -141,9 +143,10 @@ Page({
   // 线路规划
   goLine: function(mode, fromGo, toGo) {
     let that = this;
+    console.log(fromGo,toGo)
     // 腾讯API：提供路线规划
     qqmapsdk.direction({
-      mode: mode,//(驾车，步行，骑行，公交)
+      mode: mode, //(驾车，步行，骑行，公交)
       from: fromGo,
       to: toGo,
       success(res) {
@@ -185,6 +188,7 @@ Page({
           //坐标解压（返回的点串坐标，通过前向差分进行压缩）
           let kr = 1000000;
           let step = ret.result.routes[0].steps;
+          console.log(step)
           for (let i = 2; i < coors.length; i++) {
             coors[i] = Number(coors[i - 2]) + Number(coors[i]) / kr;
           }
@@ -215,13 +219,13 @@ Page({
     let val = this.data.inpVal;
     let mks = this.data.markers;
     let len = mks.length;
-    if (len >= 2){
-      mks = mks.splice(0,1)
+    if (len >= 2) {
+      mks = mks.splice(0, 1)
     }
     let poi = this.data.points;
     this.setData({
       polyline: [],
-      showList:false
+      showList: false
     })
     // 腾讯API：地点搜索
     qqmapsdk.search({
@@ -257,8 +261,8 @@ Page({
   // 点击marker事件
   markerTap: function(e) {
     let mks = this.data.markers;
-    let that = this
     console.log(mks)
+    let that = this
     let markeId = e.markerId;
     if (mks.length === 2) {
       let lat = this.data.latitude,
@@ -269,6 +273,7 @@ Page({
       let fromGo = lat + "," + log;
       let toGo = latGo + "," + logGo;
       this.goLine(mode, fromGo, toGo);
+      console.log(mks)
     } else {
       let mk = [];
       mk.push(mks[0]);
@@ -283,6 +288,7 @@ Page({
       this.setData({
         markers: mkr
       })
+      console.log(mks)
     }
   },
 
@@ -312,9 +318,12 @@ Page({
         mode = modes,
         latGo = mks[1].latitude,
         logGo = mks[1].longitude;
-
+      console.log(lat, log)
       let fromGo = lat + "," + log;
       let toGo = latGo + "," + logGo;
+      this.setData({
+        polyline:[]
+      })
       this.goLine(mode, fromGo, toGo);
     }
     this.setData({
