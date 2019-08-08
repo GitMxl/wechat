@@ -1,5 +1,6 @@
 page {
   background-color: #eeee;
+  overflow: hidden;
 }
 
 .container {
@@ -11,17 +12,30 @@ page {
   height: 900rpx;
 }
 
-cover-view {
-  position: absolute;
-  left: 15rpx;
-  bottom: 15rpx;
+.locaBox {
+  position: fixed;
+  left: 25rpx;
+  bottom:155rpx;
 }
-
-cover-image {
+.loca {
   width: 60rpx;
 }
-
-.slider {
+.scaleBox{
+  position: fixed;
+  bottom: 158rpx;
+  right: 25rpx;
+  display: flex;
+  align-items: center;
+  font-size: 36rpx;
+}
+.scaleBox .text{
+  width: 50rpx;
+  text-align: center;
+}
+.scaleBox cover-image{
+  width: 50rpx;
+}
+/* .slider {
   width: 60%;
   position: absolute;
   left: 50%;
@@ -31,7 +45,7 @@ cover-image {
 }
 .slider slider{
   z-index: 666;
-}
+} */
 
 .goList {
   width: 100%;
@@ -57,7 +71,7 @@ cover-image {
 input {
   width: 80%;
   height: 60rpx;
-  margin: 20rpx 10rpx 20rpx 70rpx;
+  margin: 20rpx 10rpx 20rpx 60rpx;
   border: 1px solid #8e8e8e;
   border-radius: 16rpx;
   padding: 0 20rpx;
@@ -68,7 +82,6 @@ input {
 .downBox {
   background: #fff;
   height: 400rpx;
-  overflow: auto;
 }
 
 .downChoose {

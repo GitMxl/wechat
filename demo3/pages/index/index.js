@@ -18,7 +18,8 @@ Page({
     city: '',
     searchList: [],
     showList: false,
-    province: ''
+    province: '',
+    PageNum:1,
   },
   // 定位
   showGetLocation() {
@@ -28,6 +29,10 @@ Page({
       type: 'gcj02', 
       altitude:true,
       success: function(res) {
+        setTimeout(function () {
+          wx.hideNavigationBarLoading();
+          wx.hideLoading();
+        }, 1000)
         let latitude = res.latitude,
           longitude = res.longitude;
         // 腾讯API:坐标到坐标所在位置的文字描述的转换
@@ -47,6 +52,7 @@ Page({
               }],
               longitude: res.result.location.lng,
               latitude :res.result.location.lat,
+              scale:18,
               markers: [{
                 id: 0,
                 title: res.result.formatted_addresses.rough,
@@ -55,18 +61,98 @@ Page({
                 callout: {
                   content: res.result.formatted_addresses.rough,
                   color: '#0e0e0e',
-                  display: 'BYCLICK'
+                  display: 'ALWAYS'
                 },
               }]
             })
           },
           fail(res) {
             console.log(res)
+            
           }
         })
       },
+      fail(res){
+          console.log(res)
+        wx.getSetting({
+          success(res) {
+            console.log(res)
+            if (!res.authSetting['scope.userLocation']) {
+              wx.showModal({
+                title: '是否授权当前位置',
+                content: '需要获取您的地理位置，否则无法使用地图！',
+                success(tip) {
+                  if (tip.confirm) {
+                    wx.openSetting({
+                      success: function (data) {
+                        if (data.authSetting["scope.userLocation"] === true) {
+                          wx.showToast({
+                            title: '授权成功',
+                            icon: 'success',
+                            duration: 1000
+                          })
+                          wx.showNavigationBarLoading();
+                          wx.showLoading({
+                            title: '加载中',
+                            mask: true
+                          })
+                          that.showGetLocation()
+                        } else {
+                          wx.showToast({
+                            title: '授权失败',
+                            icon: 'success',
+                            duration: 1000
+                          })
+                        }
+                      }
+                    })
+                  }
+                }
+              })
+            }
+          }
+        })
+      }
     })
-
+  },
+  downScroll:function(e){
+    console.log(e)
+    let PageNum = this.data.PageNum;
+    PageNum++;
+    this.setData({
+      PageNum: PageNum
+    })
+    console.log(PageNum)
+    let val = this.data.inpVal;
+    let city = this.data.city;
+    let sug = this.data.searchList
+    let that = this
+    // 腾讯API：用于获取输入关键字的补完与提示
+    qqmapsdk.getSuggestion({
+      keyword: val,
+      region: city,
+      page_index: PageNum,
+      success(res) {
+        console.log(res)
+        for (var i = 0; i < res.data.length; i++) {
+          sug.push({ // 获取返回结果，放到sug数组中
+            title: res.data[i].title,
+            id: res.data[i].id,
+            addr: res.data[i].address,
+            city: res.data[i].city,
+            district: res.data[i].district,
+            latitude: res.data[i].location.lat,
+            longitude: res.data[i].location.lng
+          });
+        }
+        that.setData({
+          searchList: sug
+        })
+      },
+      fail(res) {
+        console.log(res)
+      }
+    })
   },
   //图标定位
   location: function(e) {
@@ -76,10 +162,26 @@ Page({
       inpVal: ''
     })
     this.showGetLocation();
+    this.mapCtx.moveToLocation()
   },
-  // 地图放大缩小
-  sliderTap: function(e) {
-    let slider = e.detail.value;
+  // 地图放大
+  addScale: function() {
+    let slider = this.data.scale;
+    slider++
+    if (slider>=20){
+      slider =20
+    }
+    this.setData({
+      scale: slider
+    })
+  },
+  // 地图缩小
+  subtractScale: function () {
+    let slider = this.data.scale;
+    slider--;
+    if (slider <= 3) {
+      slider = 3
+    }
     this.setData({
       scale: slider
     })
@@ -103,7 +205,8 @@ Page({
     } else {
       this.setData({
         showList: false,
-        inpVal:""
+        inpVal:"",
+        PageNum:1
       })
       return ;
     }
@@ -137,6 +240,7 @@ Page({
       },
       fail(res) {
         console.log(res)
+        
       }
     })
   },
@@ -215,6 +319,11 @@ Page({
   },
   // 搜索
   searchTap: function(e) {
+    wx.showNavigationBarLoading();
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
     let that = this;
     let val = this.data.inpVal;
     let mks = this.data.markers;
@@ -232,6 +341,10 @@ Page({
       keyword: val,
       region: that.data.city,
       success(res) {
+        setTimeout(function () {
+          wx.hideNavigationBarLoading();
+          wx.hideLoading();
+        }, 1000)
         for (let i = 0; i < res.data.length; i++) {
           mks.push({
             id: res.data[i].id,
@@ -339,21 +452,23 @@ Page({
     qqmapsdk = new wxmap({
       key: '6UJBZ-MAHR5-V6OIE-QTMQA-WP777-5XFK2'
     })
-
+    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-
+  onReady: function () {
+    let that = this
+    this.mapCtx = wx.createMapContext('map')
+    setTimeout(function(){
+      that.location()},1000)
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function() {
-
+  onShow: function () {
   },
 
   /**
