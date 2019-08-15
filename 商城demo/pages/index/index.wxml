@@ -1,0 +1,63 @@
+<!--index.wxml-->
+<view class="container" >
+  <!-- 轮播图 -->
+  <view class="header" >
+    <view class="searchbar">
+      <input type="text" placeholder=""></input>
+      <icon type="search"></icon>
+    </view>
+    <view class="swiperBox">
+      <swiper autoplay circular>
+        <swiper-item wx:for="{{swiperList}}" wx:key="{{index}}">
+          <image src="{{item.imgUrl}}" mode="widthFix"></image>
+        </swiper-item>
+      </swiper>
+    </view>
+  </view>
+  <!-- 分类 -->
+  <view class="sort-Modul">
+    <view class="sort-Module-List" wx:for="{{sortList}}" wx:key="{{index}}">
+      <image src="{{item.img}}" mode="widthFix"></image>
+      <text>{{item.txt}}</text>
+    </view>
+  </view>
+  <!-- 活动 -->
+  <view class="active-box">
+    <view class="active-title">活动专区</view>
+    <view class="active-shop">
+      <view class="active-shop-left">
+        <text>{{active.activeLetf.title}}</text>
+        <view class="surplus">剩余
+          <text>{{active.activeLetf.surplus}}</text>件 </view>
+        <image src="{{active.activeLetf.img}}" mode="widthFix"></image>
+      </view>
+      <view class="active-shop-right">
+        <view class="active-shop-right-top">
+          <view>
+            <text>{{active.activeRightTop.title1}}</text>
+            <text>{{active.activeRightTop.title2}}</text>
+          </view>
+          <image src="{{active.activeRightTop.img}}" mode="widthFix"></image>
+        </view>
+        <view class="active-shop-right-dowm">
+          <view class="active-shop-right-dowm-left dowm-comm" wx:for="{{active.activeRightDown}}" wx:key="{{index}}">
+            <text>{{item.title1}}</text>
+            <text>{{item.title2}}</text>
+            <image src="{{item.img}}" mode="widthFix"></image>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 商品推荐 -->
+  <view class="shop-recommend">
+    <view class="shop-title">商品推荐</view>
+    <view class="shop-recommend-list">
+      <view class="shop-recommend-box" wx:for="{{recommendList}}" wx:key="{{index}}">
+        <image src="{{item.img}}" mode="widthFix"></image>
+        <text class="shop-recommend-title">{{item.title}}</text>
+        <text class="shop-recommend-price">￥{{item.price}}</text>
+      </view>
+    </view>
+  </view>
+</view>

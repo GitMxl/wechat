@@ -1,0 +1,46 @@
+<!--pages/pay/pay.wxml-->
+<view class="container">
+  <view class="shopTitle">
+    购物清单
+  </view>
+  <view class="shopDetail">
+    <image src="{{images}}" mode="widthFix"></image>
+    <view class="shopIntroduce">
+      <text class="title">{{title}}</text>
+      <text class="price">￥{{price}}元</text>
+    </view>
+    <view class="num">x{{count}}</view>
+  </view>
+  <view class="timeTitle"> 
+    配送时间
+  </view>
+  <view class="timeList">
+    <picker bindchange="bindPickerChange" value="{{index}}" range="{{timeGive}}">
+        <view class="picker">
+          <text>{{timeGive[index]}}</text>
+          <image src="../../image/right.png" mode="widthFix"></image>
+        </view>
+    </picker>
+  </view>
+  <view class="leaveMessageTitle">
+    留言
+  </view>
+  <view class="leveMessageContent">
+    <input placeholder="选填：给商家留言（100字以内）" maxlength="100" />
+  </view>
+  <view class="orderMoney comMoney">
+    <text>订单金额</text>
+    <text class="orderMoneyPirce comPrice">￥{{orderPrice}} </text>
+  </view>
+  <view class="carriage comMoney">
+    <text>运费</text>
+    <text class="freightPrice comPrice">￥{{freight}}</text>
+  </view>
+  <view class="realityPay comMoney">
+    <text>实际费用</text>
+    <text class="payMoneyPrice comPrice">￥{{payMoney}}</text>
+  </view>
+  <view class="wxpay" bindtap="wxPay">
+    微信支付
+  </view>
+</view>

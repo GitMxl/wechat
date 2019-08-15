@@ -1,0 +1,32 @@
+<!--pages/userInfo/userInfo.wxml-->
+<!-- 开关按钮 -->
+<view class="switch">
+  <switch checked bindchange="swithchange" />
+</view>
+<view class="box">
+  <view class="slider">
+    <slider min="3" max="20" show-value step="1" value="{{scale}}" bindchange="sliderchange" block-size='20' />
+  </view>
+  <map id="map" zIndex='1' latitude="{{latitude}}" longitude="{{longitude}}" scale="{{scale}}" show-location markers="{{markers}}" polyline="{{polyline}}" bindmarkertap="markerMap" bindtap="mapTap" bindpoitap="poiTap" rotate="360" enable-rotate="true" enable-traffic="false" >
+    <cover-view class="locationCover">
+      <cover-image src="../../image/location.png" bindtap="locationTap"></cover-image>
+    </cover-view>
+  </map>
+</view>
+<view class="search">
+  <input bindinput="inputValue" />
+  <button bindtap="nearby_search">搜索</button>
+</view>
+<form bindsubmit="formSubmit">
+  <!--输入起点和目的地经纬度坐标，格式为string格式-->
+  <!--起点输入框,同终点，不填默认当前位置-->
+  <label>起点：
+    <input style="border:1px solid #000;" name="start" bindtap="startTap" value="{{startValue}}"></input>
+  </label>
+  <!--终点输入框,例：39.984060,116.307520-->
+  <label>终点：
+    <input style="border:1px solid #000;" value="{{endValue}}" name="dest" bindtap="endTap"></input>
+  </label>
+  <!--提交表单数据-->
+  <button form-type="submit">路线规划</button>
+</form>

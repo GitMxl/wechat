@@ -1,0 +1,41 @@
+<!--pages/userInfo/userInfo.wxml-->
+<view class="comtainer">
+  <view class="header" >
+    <view wx:if="{{showUserButton}}">
+      <button open-type="getUserInfo" bindgetuserinfo="bindUserInfo">获取用户信息</button>
+    </view>
+    <view wx:else>
+      <image src="{{usermess.avatarUrl}}"></image>
+      <text>{{usermess.nickName}}</text>
+    </view>
+  </view>
+  <view class="modeList">
+    <view>
+      <image src="../../image/order.svg"></image>
+      <text>我的订单</text>
+    </view>
+    <view>
+      <image src="../../image/coupons.svg"></image>
+      <text>优惠卷</text>
+    </view>
+    <view>
+      <image src="../../image/address.svg"></image>
+      <text>地址</text>
+    </view>
+    <view>
+      <image src="../../image/service.svg"></image>
+      <text>客服中心</text>
+    </view>
+    <view>
+      <image src="../../image/collection.svg"></image>
+      <text>收藏</text>
+    </view>
+    <view>
+      <image src="../../image/password.svg"></image>
+      <text>密码</text>
+    </view>
+  </view>
+  <view wx:if="{{!showUserButton}}" class="exit">
+    <button type="warn" bindtap="exitButton">退出登录</button>
+  </view>
+</view>

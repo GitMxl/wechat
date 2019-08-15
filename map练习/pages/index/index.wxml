@@ -1,0 +1,37 @@
+<!--index.wxml-->
+<!-- 出行方式 -->
+<view class="goList">
+  <view class="car {{clas == 'car' ? 'active':''}}" data-clas="car" bindtap="goTo">驾车</view>
+  <view class="walk {{clas == 'walk' ? 'active':''}}" data-clas="walk" bindtap="goTo">步行</view>
+  <view class="bus {{clas == 'bus' ? 'active':''}}" data-clas="bus" bindtap="goTo">公交</view>
+  <view class="riding {{clas == 'riding' ? 'active':''}}" data-clas="riding" bindtap="goTo">骑行</view>
+</view>
+<!-- 搜索框 -->
+<view class="search">
+  <input bindinput="inputValue" value="{{inpVal}}"></input>
+  <icon type="search" size="20" bindtap="searchTap"></icon>
+</view>
+<!-- 下拉 -->
+<scroll-view scroll-y  class="downBox" wx:if="{{showList}}" bindscrolltolower="downScroll">
+  <view wx:for="{{searchList}}" wx:key="{{key}}" class="downChoose">
+    <view id="{{item.id}}" data-title="{{item.title}}" bindtap="downText">{{item.title}} </view>
+    <text>{{item.addr}}</text>
+  </view>
+</scroll-view>
+<!-- 地图 -->
+<view class="container">
+  <map id="map" longitude="{{longitude}}" latitude="{{latitude}}" scale="{{scale}}" markers="{{markers}}" polyline="{{polyline}}" include-points="{{points}}" bindmarkertap="markerTap" show-location enable-scroll enable-zoom enable-rotate show-scale show-compass>
+    <cover-view class="locaBox">
+      <cover-image class="loca" src="../../image/location.png" bindtap="location"></cover-image>
+    </cover-view>
+    <cover-view class="scaleBox"> 
+      <cover-image src="../../image/jia.png" class="scaleJia" bindtap="addScale"></cover-image>
+      <cover-view class="text">{{scale}}</cover-view>
+      <cover-image src="../../image/jian.png" class="scaleJian" bindtap="subtractScale"></cover-image>
+    </cover-view>
+  </map>
+  <!-- 真机不支持滑块 -->
+  <!-- <view class="slider" z-index="2">
+    <slider min="3" z-index="2" max="20" value="{{scale}}" block-size="20" show-value bindchange="sliderTap"></slider>
+  </view> -->
+</view>

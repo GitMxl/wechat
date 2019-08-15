@@ -1,0 +1,109 @@
+/* pages/pay/pay.wxss */
+page{
+  background: #F4F4F4;
+  position: relative;
+}
+.shopTitle, .timeTitle, .leaveMessageTitle{
+  width: 100%;
+  border-bottom: 1px solid #8e8e8e;
+  line-height: 80rpx;
+  font-size: 28rpx;
+  box-sizing: border-box;
+  padding: 0 0 0 20rpx;
+  font-weight: bold;
+  background: #fff;
+}
+
+.shopDetail{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 0 25rpx 0;
+  background: #fff;
+}
+.shopDetail image{
+  width: 160rpx;
+  height: 140rpx;
+  display: block;
+  padding: 15rpx;
+}
+.shopIntroduce{
+  margin-right: auto;
+}
+.shopIntroduce text{
+  display: block;
+  font-size: 30rpx;
+}
+.title{
+  margin: 20rpx 0 0 0;
+}
+.price{
+  color: red;
+  margin: 15rpx 0 0 0;
+}
+.num{
+  margin: 20rpx 20rpx 0 0;
+  font-size: 30rpx;
+}
+.timeList{
+  line-height: 100rpx;
+  background: #fff;
+  margin: 0 0 25rpx 0;
+}
+.picker{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #808080;
+  padding: 0 0 0 20rpx;
+  box-sizing: border-box;
+  font-size: 30rpx;
+}
+.picker image{
+  width: 40rpx;
+}
+
+.leveMessageContent{
+  background: #fff;
+  height: 85rpx;
+  line-height: 85rpx;
+  box-sizing: border-box;
+  margin: 0 0 25rpx 0;
+}
+.leveMessageContent input{
+  line-height: 85rpx;
+  padding: 0 0 0 25rpx;
+  height: 85rpx;
+  color: #888888;
+}
+.comMoney{
+  width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  font-size: 30rpx;
+  line-height: 80rpx;
+  padding: 0 20rpx;
+  border-bottom: 1px solid #8e8e8e;
+}
+.comPrice{
+  color: red;
+}
+.realityPay, .orderMoney{
+  border-bottom: 0;
+}
+
+.wxpay{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 2;
+  background: #1AAD19;
+  color: #fff;
+  text-align: center;
+  line-height: 105rpx;
+}

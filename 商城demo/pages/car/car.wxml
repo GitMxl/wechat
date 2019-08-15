@@ -1,0 +1,39 @@
+<scroll-view scrolly-y class="container">
+  <swipe-action wx:if="{{dataList.length}}" actions="{{actions}}" toggle="{{toggle}}" unclosable="{{true}}" bindchange="handlerCloseButton" class="shopList" wx:for="{{dataList}}" wx:key="{{index}}" params="{{item}}" data-id="{{item.id}}">
+    <view slot="content">
+      <view class="list-item">
+        <icon type="success" size="20" data-select="{{item.selected}}" bindtap="selectShop" data-key="{{index}}" wx:if="{{item.selected}}"></icon>
+        <icon type="circle" size="20" bindtap="selectShop" data-select="{{item.selected}}" data-key="{{index}}" wx:else></icon>
+        <image src="{{item.img}}" bindtap="asd" class="item-img"></image>
+        <view class="item-box">
+          <view class="item-title">{{item.title}}</view>
+          <view class="item-time">￥{{item.price}}</view>
+        </view>
+        <view class="item-num">
+          <text class="add-num com-num" data-key="{{index}}" data-num="{{item.num}}" bindtap="addNum">+</text>
+          <text class="num" bindtap="priceNum">{{item.num}}</text>
+          <text class="subtract-num com-num" data-num="{{item.num}}" data-key="{{index}}" bindtap="subtractNum">-</text>
+        </view>
+      </view>
+    </view>
+  </swipe-action>
+  <view class="buyShop" wx:if="{{dataList.length}}">
+    <view class="selectBox">
+      <icon type="success" color="red" size="20" bindtap="shopAll" data-selectAll="{{selectedAll}}" wx:if="{{selectedAll}}"></icon>
+      <icon type="circle" size="20" bindtap="shopAll" data-selectAll="{{selectedAll}}" wx:else></icon>
+      <text>全选</text>
+    </view>
+    <view class="total-price">
+      <text>总价：</text>
+      <text>￥{{totalMoney}}</text>
+    </view>
+    <view class="pay">
+      <text>购买</text>
+    </view>
+  </view>
+  <view wx:else class="car-emt">
+    <image src="http://img02.yiguo.com/e/web/150930/00981/161016/cart-none.png"></image>
+    <text>购物车还是空的....</text>
+    <button type="primary" bindtap="goShop">去购物</button>
+  </view>
+</scroll-view>
