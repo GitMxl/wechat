@@ -1,0 +1,11 @@
+{
+  "usingComponents": {
+    "slide-view": "miniprogram-slide-view",
+    "mp-dialog": "../../miniprogram_npm/weui-miniprogram/dialog/dialog",
+    "mp-searchbar": "../../miniprogram_npm/weui-miniprogram/searchbar/searchbar",
+    "mp-gallery": "../../miniprogram_npm/weui-miniprogram/gallery/gallery",
+    "mp-slideview": "../../miniprogram_npm/weui-miniprogram/slideview/slideview",
+    "mp-cells": "../../miniprogram_npm/weui-miniprogram/cells/cells",
+    "mp-cell": "../../miniprogram_npm/weui-miniprogram/cell/cell"
+  }
+}

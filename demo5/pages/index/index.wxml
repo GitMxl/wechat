@@ -1,0 +1,41 @@
+<view  class='slide'>
+  <slide-view width="750" height="110" slide-width="500">
+  <view slot="left" class="l">
+    <image src="/pages/image/file_transfer.jpg" class="img"></image>
+    <view class='text'>
+      <view class='title'>文件传输助手</view>
+      <view class='time'>7:00 PM</view>
+    </view>
+  </view>
+  <view slot="right" class="r">
+    <view class='read'>标为已读</view>
+    <view class='delete'>删除</view>
+  </view>
+</slide-view>
+</view>
+
+
+<mp-dialog title="test" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+    <view>test content</view>
+</mp-dialog>
+
+<mp-searchbar placeholder="请输入关键字搜索" bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
+
+
+<mp-gallery show="{{show}}" bindchange="change" binddelete="delete" bindhide="hide" img-urls="{{imgUrls}}" delete hide-on-click="{{true}}" current="1"></mp-gallery>
+
+
+
+<mp-cells ext-class="my-cells" title="带说明的列表项">
+    <mp-cell value="标题文字" footer="说明文字"></mp-cell>
+    <mp-cell>
+        <view>标题文字（使用slot）</view>
+        <view slot="footer">说明文字</view>
+    </mp-cell>
+    <mp-slideview buttons="{{slideButtons}}" bindbuttontap="slideButtonTap">
+        <mp-cell value="左滑可以删除" footer="说明文字"></mp-cell>
+    </mp-slideview>
+    <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" bindbuttontap="slideButtonTap">
+        <mp-cell value="左滑可以删除（按钮Button）" footer="说明文字"></mp-cell>
+    </mp-slideview>
+</mp-cells>

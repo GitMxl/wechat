@@ -120,23 +120,21 @@ Page({
     let select = e.currentTarget.dataset.select;
     let dataList = this.data.dataList;
     dataList[key].selected = !select;
-    this.setData({
-      dataList: dataList
-    })
+    
     for (let i in dataList) {
       if (!dataList[i].selected) {
-        console.log(dataList[i])
         this.setData({
-          selectedAll: dataList[i].selected
+          selectedAll: dataList[i].selected,
+          dataList: dataList
         })
         break;
       } else {
         this.setData({
-          selectedAll: true
+          selectedAll: true,
+          dataList: dataList
         })
       }
     }
-    
     this.totalPrice()
   },
   shopAll(e) {
@@ -158,7 +156,6 @@ Page({
     for (let i = 0; i < dataList.length; i++) {
       if (dataList[i].selected) {
         total += foo.FloatingPointCalculator.mult(dataList[i].price, dataList[i].num)
-
       }
     }
     Math.formatFloat = function(f, digit) {

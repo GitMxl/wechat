@@ -1,0 +1,74 @@
+<!doctype html>
+<title>gallery example</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box }
+html { font-size: 62.5%; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif }
+html, body { height: 100% }
+body { display: flex; align-items: center; justify-content: center; flex-direction: column; padding: 1rem }
+.grid { display: grid; list-style: none; grid-template-columns: 2fr 1fr; grid-gap: 1rem; max-width: 46rem; width: 100%; }
+.grid > li:first-child { grid-row: 1 / span 2 }
+.grid img { display: block; width: 100%; height: 100%; object-fit: cover }
+h2 { font-size: 2rem; margin: 2em auto 1em }
+</style>
+
+<h2>Gallery 1</h2>
+<ul class="grid">
+  <li>
+    <img
+      src="https://picsum.photos/300/210/?image=100"
+      data-gallery-src="https://picsum.photos/1200/840/?image=100"
+      data-gallery-desc="Image 1"
+      alt="Image 1"
+    />
+  </li>
+  <li>
+    <img
+      src="https://picsum.photos/150/100/?image=200"
+      data-gallery-src="https://picsum.photos/1200/840/?image=200"
+      data-gallery-desc="Image 2"
+      alt="Image 2"
+    />
+  </li>
+  <li>
+    <img
+      src="https://picsum.photos/150/100/?image=3"
+      data-gallery-src="https://picsum.photos/1200/840/?image=3"
+      data-gallery-desc="Image 3"
+      alt="Image 3"
+    />
+  </li>
+</ul>
+
+<h2>Gallery 2</h2>
+<ul class="grid">
+  <li>
+    <img
+      src="https://picsum.photos/300/210/?image=101"
+      data-gallery-src="https://picsum.photos/1200/840/?image=101"
+      data-gallery-desc="Image 1"
+      data-gallery-id="second gallery"
+      alt="Image 1"
+    />
+  </li>
+  <li>
+    <img
+      src="https://picsum.photos/150/100/?image=201"
+      data-gallery-src="https://picsum.photos/1200/840/?image=201"
+      data-gallery-desc="Image 2"
+      data-gallery-id="second gallery"
+      alt="Image 2"
+    />
+  </li>
+  <li>
+    <img
+      src="https://picsum.photos/150/100/?image=4"
+      data-gallery-src="https://picsum.photos/1200/840/?image=4"
+      data-gallery-desc="Image 3"
+      data-gallery-id="second gallery"
+      alt="Image 3"
+    />
+  </li>
+</ul>
+
+<script src="lib/gallery.min.js"></script>
