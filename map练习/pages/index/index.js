@@ -19,17 +19,17 @@ Page({
     searchList: [],
     showList: false,
     province: '',
-    PageNum:1,
+    PageNum: 1,
   },
   // 定位
   showGetLocation() {
     let that = this;
     // 微信API：定位
     wx.getLocation({
-      type: 'gcj02', 
-      altitude:true,
+      type: 'gcj02',
+      altitude: true,
       success: function(res) {
-        setTimeout(function () {
+        setTimeout(function() {
           wx.hideNavigationBarLoading();
           wx.hideLoading();
         }, 1000)
@@ -51,8 +51,8 @@ Page({
                 latitude: res.result.location.lat,
               }],
               longitude: res.result.location.lng,
-              latitude :res.result.location.lat,
-              scale:18,
+              latitude: res.result.location.lat,
+              scale: 18,
               markers: [{
                 id: 0,
                 title: res.result.formatted_addresses.rough,
@@ -68,12 +68,12 @@ Page({
           },
           fail(res) {
             console.log(res)
-            
+
           }
         })
       },
-      fail(res){
-          console.log(res)
+      fail(res) {
+        console.log(res)
         wx.getSetting({
           success(res) {
             console.log(res)
@@ -84,7 +84,7 @@ Page({
                 success(tip) {
                   if (tip.confirm) {
                     wx.openSetting({
-                      success: function (data) {
+                      success: function(data) {
                         if (data.authSetting["scope.userLocation"] === true) {
                           wx.showToast({
                             title: '授权成功',
@@ -96,7 +96,10 @@ Page({
                             title: '加载中',
                             mask: true
                           })
-                          that.showGetLocation()
+                          setTimeout(function () {
+                            wx.hideLoading();
+                            wx.hideNavigationBarLoading()
+                          }, 1000)
                         } else {
                           wx.showToast({
                             title: '授权失败',
@@ -115,7 +118,8 @@ Page({
       }
     })
   },
-  downScroll:function(e){
+  //下拉加载
+  downScroll: function(e) {
     console.log(e)
     let PageNum = this.data.PageNum;
     PageNum++;
@@ -168,15 +172,15 @@ Page({
   addScale: function() {
     let slider = this.data.scale;
     slider++
-    if (slider>=20){
-      slider =20
+    if (slider >= 20) {
+      slider = 20
     }
     this.setData({
       scale: slider
     })
   },
   // 地图缩小
-  subtractScale: function () {
+  subtractScale: function() {
     let slider = this.data.scale;
     slider--;
     if (slider <= 3) {
@@ -205,10 +209,10 @@ Page({
     } else {
       this.setData({
         showList: false,
-        inpVal:"",
-        PageNum:1
+        inpVal: "",
+        PageNum: 1
       })
-      return ;
+      return;
     }
     let lat = this.data.latitude,
       log = this.data.longitude,
@@ -240,14 +244,14 @@ Page({
       },
       fail(res) {
         console.log(res)
-        
+
       }
     })
   },
   // 线路规划
   goLine: function(mode, fromGo, toGo) {
     let that = this;
-    console.log(fromGo,toGo)
+    console.log(fromGo, toGo)
     // 腾讯API：提供路线规划
     qqmapsdk.direction({
       mode: mode, //(驾车，步行，骑行，公交)
@@ -341,7 +345,7 @@ Page({
       keyword: val,
       region: that.data.city,
       success(res) {
-        setTimeout(function () {
+        setTimeout(function() {
           wx.hideNavigationBarLoading();
           wx.hideLoading();
         }, 1000)
@@ -435,7 +439,7 @@ Page({
       let fromGo = lat + "," + log;
       let toGo = latGo + "," + logGo;
       this.setData({
-        polyline:[]
+        polyline: []
       })
       this.goLine(mode, fromGo, toGo);
     }
@@ -448,28 +452,27 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    this.showGetLocation();
+    // this.showGetLocation();
     qqmapsdk = new wxmap({
       key: '6UJBZ-MAHR5-V6OIE-QTMQA-WP777-5XFK2'
     })
-    
   },
 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     let that = this
     this.mapCtx = wx.createMapContext('map')
-    setTimeout(function(){
-      that.location()},1000)
+    setTimeout(function() {
+      that.location()
+    }, 1000)
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  },
+  onShow: function() {},
 
   /**
    * 生命周期函数--监听页面隐藏

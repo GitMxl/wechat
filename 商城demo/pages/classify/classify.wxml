@@ -1,9 +1,9 @@
 <!--pages/classify/classify.wxml-->
 <view class="container">
-  <scroll-view scroll-y class="classify-list" bindscroll="listBindscrolltolower" scrollTop='{{scrollTop}}'>
+  <scroll-view scroll-with-animation scroll-y class="classify-list" bindscroll="listBindscrolltolower" scrollTop='{{scrollTop}}'>
     <text class="{{selectId == index ? 'classify-box' :''}}" data-id="{{item.id}}" wx:for="{{classifyList}}" wx:key="{{index}}" bindtap="selectClassify">{{item.classifyTitle}}</text>
   </scroll-view>
-  <scroll-view scroll-y class="classify-centent" bindscroll="classifyBindscrolltolower"  scrollTop='{{scrollClass}}'>
+  <scroll-view scroll-with-animation scroll-y class="classify-centent" bindscroll="classifyBindscrolltolower"  scrollTop='{{scrollClass}}'>
     <view class="classify-centent-box" wx:for="{{classifyContent}}" wx:key="{{index}}">
       <view class="classify-centent-title">{{item.title}}</view>
       <view class="classify-centent-list">

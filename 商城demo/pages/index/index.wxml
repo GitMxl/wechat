@@ -3,7 +3,7 @@
   <!-- 轮播图 -->
   <view class="header" >
     <view class="searchbar">
-      <input type="text" placeholder=""></input>
+      <input type="text" bindinput="inpFocus" placeholder="请输入"></input>
       <icon type="search"></icon>
     </view>
     <view class="swiperBox">
@@ -54,7 +54,7 @@
     <view class="shop-title">商品推荐</view>
     <view class="shop-recommend-list">
       <view class="shop-recommend-box" wx:for="{{recommendList}}" wx:key="{{index}}">
-        <image src="{{item.img}}" mode="widthFix"></image>
+        <image src="{{item.img}}" data-index="{{index}}" bindtap="imgTap" mode="widthFix"></image>
         <text class="shop-recommend-title">{{item.title}}</text>
         <text class="shop-recommend-price">￥{{item.price}}</text>
       </view>

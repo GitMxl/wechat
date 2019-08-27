@@ -15,15 +15,14 @@
 </view>
 
 
-<mp-dialog title="test" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
+<!-- <mp-dialog title="test" show="{{dialogShow}}" bindbuttontap="tapDialogButton" buttons="{{buttons}}">
     <view>test content</view>
-</mp-dialog>
+</mp-dialog> -->
 
 <mp-searchbar placeholder="请输入关键字搜索" bindselectresult="selectResult" search="{{search}}"></mp-searchbar>
 
 
 <mp-gallery show="{{show}}" bindchange="change" binddelete="delete" bindhide="hide" img-urls="{{imgUrls}}" delete hide-on-click="{{true}}" current="1"></mp-gallery>
-
 
 
 <mp-cells ext-class="my-cells" title="带说明的列表项">
@@ -38,4 +37,13 @@
     <mp-slideview buttons="{{slideButtons}}" icon="{{true}}" bindbuttontap="slideButtonTap">
         <mp-cell value="左滑可以删除（按钮Button）" footer="说明文字"></mp-cell>
     </mp-slideview>
+</mp-cells>
+
+
+
+
+<mp-cells>
+    <mp-cell>
+        <mp-uploader bindfail="uploadError" bindsuccess="uploadSuccess" select="{{selectFile}}" upload="{{uplaodFile}}" files="{{files}}" max-count="5" title="图片上传" tips="图片上传提示"></mp-uploader>
+    </mp-cell>
 </mp-cells>

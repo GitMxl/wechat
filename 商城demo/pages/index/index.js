@@ -7,7 +7,8 @@ Page({
     swiperList:[],
     sortList:[],
     active:[],
-    recommendList:[]
+    recommendList:[],
+    imgs:[]
   },
   
   /**
@@ -24,16 +25,22 @@ Page({
       url: 'https://easy-mock.com/mock/5d4bc44b5f42bd23c810ac25/shopapp/index',
       success:res=>{
         if(res.data.code ===0){
+          console.log(res)
           setTimeout(function () {
             wx.hideNavigationBarLoading();
             wx.hideLoading();
           }, 1000)
           let swiperList = res.data.data.swiperList, sortList = res.data.data.sortModle, active = res.data.data.active, recommendList = res.data.data.shop;
+          let imgs=[];
+          recommendList.forEach((rescomm)=>{
+            imgs.push(rescomm.img)
+          })
           that.setData({
             swiperList: swiperList,
             sortList: sortList,
             active: active,
-            recommendList: recommendList
+            recommendList: recommendList,
+            imgs: imgs
           })
         }
       }
@@ -46,7 +53,14 @@ Page({
   onReady: function () {
     
   },
-
+  inpFocus(e){
+    console.log(e)
+    wx.getSelectedTextRange({
+      complete: res => {
+        console.log('getSelectedTextRange res', res, res.start, res.end)
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面显示
    */
@@ -57,7 +71,7 @@ Page({
    * 生命周期函数--监听页面滚动事件
    */
   onPageScroll:function(e){
-    console.log(e)
+    
     
   },
   /**
@@ -66,7 +80,14 @@ Page({
   onHide: function () {
     
   },
-
+  imgTap(e){
+    let imgs = this.data.imgs, index = e.currentTarget.dataset.index;
+    wx.previewImage({
+      current: imgs[index], // 当前显示图片的http链接
+      urls:imgs, // 需要预览的图片http链接列表
+      
+    })
+  },
   /**
    * 生命周期函数--监听页面卸载
    */

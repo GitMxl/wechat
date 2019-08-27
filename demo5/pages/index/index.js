@@ -12,7 +12,14 @@ Page({
       'http://desk-fd.zol-img.com.cn/g5/M00/02/05/ChMkJ1bKyZmIWCwZABEwe5zfvyMAALIQABa1z4AETCT730.jpg',
       'http://desk-fd.zol-img.com.cn/g5/M00/02/05/ChMkJ1bKyZmIWCwZABEwe5zfvyMAALIQABa1z4AETCT730.jpg'
     ],
-    show: true
+    show: false,
+    // files: [{
+    //   url: 'http://mmbiz.qpic.cn/mmbiz_png/VUIF3v9blLsicfV8ysC76e9fZzWgy8YJ2bQO58p43Lib8ncGXmuyibLY7O3hia8sWv25KCibQb7MbJW3Q7xibNzfRN7A/0',
+    // }, {
+    //   loading: true
+    // }, {
+    //   error: true
+    // }]
   },
 
   /**
@@ -20,7 +27,9 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      search: this.search.bind(this)
+      search: this.search.bind(this),
+      selectFile: this.selectFile.bind(this),
+      uplaodFile: this.uplaodFile.bind(this)
     })
     this.setData({
       icon: 'sdsa',
@@ -34,10 +43,48 @@ Page({
       }, {
         type: 'warn',
         text: '警示',
-        extClass: 'test',
+          extClass: '警示',
         src: '', // icon的路径
       }],
     });
+  },
+  chooseImage: function (e) {
+    var that = this;
+    wx.chooseImage({
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有
+      success: function (res) {
+        // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
+        that.setData({
+          files: that.data.files.concat(res.tempFilePaths)
+        });
+      }
+    })
+  },
+  previewImage: function (e) {
+    wx.previewImage({
+      current: e.currentTarget.id, // 当前显示图片的http链接
+      urls: this.data.files // 需要预览的图片http链接列表
+    })
+  },
+  selectFile(files) {
+    console.log('files', files)
+    // 返回false可以阻止某次文件上传
+  },
+  uplaodFile(files) {
+    console.log('upload files', files)
+    // 文件上传的函数，返回一个promise
+    return new Promise((resolve, reject) => {
+      setTimeout(() => {
+        reject('some error')
+      }, 1000)
+    })
+  },
+  uploadError(e) {
+    console.log('upload error', e.detail)
+  },
+  uploadSuccess(e) {
+    console.log('upload success', e.detail)
   },
   slideButtonTap(e) {
     console.log('slide button tap', e.detail)
@@ -83,6 +130,7 @@ Page({
     this.setData({
       dialogShow: true
     })
+    console.log(window+"window")
   },
   tapDialogButton(e) {
     console.log('dialog', e.detail)
