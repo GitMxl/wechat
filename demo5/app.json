@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/file/file",
-    "pages/index/index"
+    "pages/index/index",
+    "pages/map/map"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -13,13 +14,28 @@
   "tabBar": {
     "list": [
       {
-      "pagePath": "pages/index/index",
-      "text": "首页"
-    },
-    {
-      "pagePath":"pages/file/file",
-      "text":"文件"
-    }
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "pagePath": "pages/file/file",
+        "text": "文件"
+      },
+      {
+        "pagePath":"pages/map/map",
+        "text":"地图"
+      }
     ]
+  },
+  "plugins": {
+    "routePlan": {
+      "version": "1.0.1",
+      "provider": "wx50b5593e81dd937a"
+    }
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于小程序位置接口的效果展示" 
+    }
   }
 }

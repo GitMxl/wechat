@@ -1,0 +1,4 @@
+<!--pages/map/map.wxml-->
+<view class="mapPage">
+  <map id="map" show-location style="width: 100%; height: 300px;" longitude="{{longitude}}" latitude="{{latitude}}" scale="15" bindtap='openMapLocation'></map>
+</view>

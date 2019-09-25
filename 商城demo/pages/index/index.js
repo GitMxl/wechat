@@ -1,3 +1,6 @@
+const http = require('../../utils/http.js');
+const header = http.reqHeader();
+
 Page({
 
   /**
@@ -21,30 +24,35 @@ Page({
       mask: true
     })
     let that = this;
-    wx.request({
-      url: 'https://easy-mock.com/mock/5d4bc44b5f42bd23c810ac25/shopapp/index',
-      success:res=>{
-        if(res.data.code ===0){
-          console.log(res)
-          setTimeout(function () {
-            wx.hideNavigationBarLoading();
-            wx.hideLoading();
-          }, 1000)
-          let swiperList = res.data.data.swiperList, sortList = res.data.data.sortModle, active = res.data.data.active, recommendList = res.data.data.shop;
-          let imgs=[];
-          recommendList.forEach((rescomm)=>{
-            imgs.push(rescomm.img)
-          })
-          that.setData({
-            swiperList: swiperList,
-            sortList: sortList,
-            active: active,
-            recommendList: recommendList,
-            imgs: imgs
-          })
-        }
+    http.sendRrquest('https://easy-mock.com/mock/5d4bc44b5f42bd23c810ac25/shopapp/index', 'GET','', header).then(function (res) {
+      if (res.data.code === 0) {
+        setTimeout(function () {
+          wx.hideNavigationBarLoading();
+          wx.hideLoading();
+        }, 1000)
+        let swiperList = res.data.data.swiperList, sortList = res.data.data.sortModle, active = res.data.data.active, recommendList = res.data.data.shop;
+        let imgs = [];
+        recommendList.forEach((rescomm) => {
+          imgs.push(rescomm.img)
+        })
+        that.setData({
+          swiperList: swiperList,
+          sortList: sortList,
+          active: active,
+          recommendList: recommendList,
+          imgs: imgs
+        })
       }
+    }, function (error) {
+      setTimeout(function () {
+        wx.hideNavigationBarLoading();
+        wx.hideLoading();
+      }, 1000)
+      
+      console.log(error,'error');
     })
+      
+    
   },
 
   /**

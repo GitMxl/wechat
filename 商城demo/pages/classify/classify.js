@@ -1,6 +1,8 @@
 // pages/classify/classify.js
-Page({
+const http = require('../../utils/http.js');
+const header = http.reqHeader();
 
+Page({
   /**
    * 页面的初始数据
    */
@@ -27,10 +29,12 @@ Page({
       title: '加载中',
       mask: true
     })
-    wx.request({
-      url: 'https://easy-mock.com/mock/5d4bc44b5f42bd23c810ac25/shopapp/classify?id=' + selectId,
-      success(res){
-        if (res.data.code === 0) {
+    http.sendRrquest('https://easy-mock.com/mock/5d4bc44b5f42bd23c810ac25/shopapp/classify?id=' + selectId,'GET','',header).then(function(res){
+      setTimeout(function () {
+          wx.hideNavigationBarLoading();
+          wx.hideLoading();
+        }, 1000);
+      if (res.data.code === 0) {
           setTimeout(function () {
             wx.hideNavigationBarLoading();
             wx.hideLoading();
@@ -41,7 +45,12 @@ Page({
             scrollClass: 0
           })
         }
-      }
+    }, function (err) {
+      setTimeout(function () {
+        wx.hideNavigationBarLoading();
+        wx.hideLoading();
+      }, 1000)
+      console.log(err, 'err')
     })
   },
   listBindscrolltolower:function(e){
@@ -60,23 +69,30 @@ Page({
       title: '加载中',
       mask: true
     })
-    let id =this.data.selectId
-    wx.request({
-      url: 'https://easy-mock.com/mock/5d4bc44b5f42bd23c810ac25/shopapp/classify?id=' + id,
-      success(res){
-        console.log(res)
-        if (res.data.code === 0){
-          setTimeout(function () {
-            wx.hideNavigationBarLoading();
-            wx.hideLoading();
-          }, 1000)
-          let classifyList = res.data.dataclass.classify,classifyContent = res.data.data;
-          that.setData({
-            classifyList: classifyList,
-            classifyContent: classifyContent
-          })
-        }
+    let id =this.data.selectId;
+    http.sendRrquest('https://easy-mock.com/mock/5d4bc44b5f42bd23c810ac25/shopapp/classify?id='+id,'GET','',header).then(function(res){
+      setTimeout(function () {
+        wx.hideNavigationBarLoading();
+        wx.hideLoading();
+      }, 1000)
+      console.log(res)
+      if (res.data.code === 0) {
+        setTimeout(function () {
+          wx.hideNavigationBarLoading();
+          wx.hideLoading();
+        }, 1000)
+        let classifyList = res.data.dataclass.classify, classifyContent = res.data.data;
+        that.setData({
+          classifyList: classifyList,
+          classifyContent: classifyContent
+        })
       }
+    },function(err){
+      setTimeout(function () {
+        wx.hideNavigationBarLoading();
+        wx.hideLoading();
+      }, 1000)
+      console.log(err,'err')
     })
   },
 

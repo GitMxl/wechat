@@ -79,7 +79,7 @@ Page({
             console.log(res)
             if (!res.authSetting['scope.userLocation']) {
               wx.showModal({
-                title: '是否授权当前位置',
+                title: '是否定位',
                 content: '需要获取您的地理位置，否则无法使用地图！',
                 success(tip) {
                   if (tip.confirm) {
@@ -452,7 +452,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    // this.showGetLocation();
     qqmapsdk = new wxmap({
       key: '6UJBZ-MAHR5-V6OIE-QTMQA-WP777-5XFK2'
     })
