@@ -1,0 +1,138 @@
+/**index.wxss**/
+page{
+  background: #41a7e7;
+  color: #fff;
+  text-align: center;
+}
+/* 搜索 */
+.search-box{
+  width: 80%;
+  height: 60rpx;
+  border-bottom: 1px solid #fff;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  margin: 0 auto;
+  text-align: left;
+  padding: 0 10rpx;
+}
+.search-box input{
+  display: block;
+  margin: 0 0 0 15rpx;
+  width: 100%;
+  height: 60rpx;
+}
+.pla{
+  color: #fff
+}
+/* 当前城市 */
+.city-txt{
+  font-size: 18px;
+  position: relative ;
+}
+/* 更新时间 */
+.update-txt{
+  position: absolute;
+  right: 15rpx;
+  bottom: 0;
+  font-size: 8px;
+  letter-spacing: 1px;
+}
+/* 当前温度 */
+.temperature-txt{
+  font-size: 58px;
+  margin:  132rpx 0 88rpx 0;
+}
+/* 天气情况 */
+.weather-txt{
+font-size: 18px;
+}
+/* 空气质量 */
+.air-txt{
+  width: 180rpx;
+  height: 44rpx;
+  margin: 36rpx auto 48rpx;
+  overflow: hidden;
+  background: #58b4e5;
+  border-radius: 24rpx;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.air-txt text{
+  margin-left: 10rpx;
+  font-size: 24rpx;
+  vertical-align: middle;
+
+}
+/* 预计天气 */
+.predict-list{
+  white-space: nowrap;
+  height: 230rpx;
+  background: #3f9fdc;
+  margin: 0 0 20rpx 0;
+}
+.predict-box{
+  display: inline-block;
+  width: 25%;
+  height: 100%;
+  font-size: 10px;
+}
+.day-txt{
+  margin: 24rpx 0;
+}
+.tem-txt{
+  margin: 0 0 28rpx 0;
+}
+.wea-txt{
+  margin: 0 0 28rpx 0;
+}
+/* 生活指数 */
+.lives-list{
+  background: #3f9fdc;
+  padding: 0 24rpx;
+  box-sizing: border-box;
+  height: 360rpx;
+}
+.lives-box{
+  height: 160rpx;
+  border-bottom: 1px solid #51b0ea;
+  display: -webkit-flex;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.lives-box:last-child{
+  border-bottom: 0;
+}
+.image-box{
+  width: 160rpx;
+  height: 100%;
+}
+.image-box image{
+  width: 100rpx;
+  margin-top: 30rpx;
+}
+.lives-txt{
+  width: 560rpx;
+  height: 100%;
+  text-align: left;
+}
+.lives-txt-title{
+  font-size: 14px;
+  margin: 24rpx 0 16rpx;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.lives-txt-content{
+  font-size: 12px;
+  white-space: wrap;
+  text-overflow: -o-ellipsis-lastline;  
+	overflow: hidden;  
+	text-overflow: ellipsis;  
+	display: -webkit-box;  
+	-webkit-line-clamp: 2;  
+	-webkit-box-orient: vertical;
+}

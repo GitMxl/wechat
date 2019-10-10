@@ -2,7 +2,7 @@
 const weMap = require("../../utils/qqmap-wx-jssdk.min.js");
 let plugin = requirePlugin('routePlan');
 let key = '6UJBZ-MAHR5-V6OIE-QTMQA-WP777-5XFK2';  //使用在腾讯位置服务申请的key
-let referer = '梵蒂挥金';   //调用插件的app的名称;
+let referer = '梵蒂天气';   //调用插件的app的名称;
 let endPoint;
 let wechatMap;
 Page({

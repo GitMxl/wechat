@@ -42,6 +42,9 @@ Page({
             swiperList: res.data.data.swiperList
           })
         }
+      },
+      fail(res) {
+        console.log(res)
       }
     })
   },
@@ -55,6 +58,9 @@ Page({
             videosList: res.data.data.index.videosList
           })
         }
+      },
+      fail(res) {
+        console.log(res)
       }
     })
   },

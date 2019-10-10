@@ -47,3 +47,7 @@
         <mp-uploader bindfail="uploadError" bindsuccess="uploadSuccess" select="{{selectFile}}" upload="{{uplaodFile}}" files="{{files}}" max-count="5" title="图片上传" tips="图片上传提示"></mp-uploader>
     </mp-cell>
 </mp-cells>
+<view bindlongtap="goWea" style="height:60rpx;background:#666666">
+<a href="https://widget-page.heweather.net/h5/index.html?bg=1&md=0123456&lc=auto&key=110fd100a87845e585bfadd6b8d02c71">khkkjkjh</a>
+        
+</view>

@@ -1,0 +1,60 @@
+<!--pages/selectCity/selectCity.wxml-->
+<view class="page">
+  <scroll-view class="cityList"  style="height:{{winHeight}}px" scroll-y scroll-into-view="{{scrollViewId}}">
+    <!-- 搜索框 -->
+    <view class="inp-search-box">
+      <input type="text" placeholder="输入城市名称或首字母" value="{{inpVal}}" placeholder-class="pla" focus="{{inputShow}}" bindfocus="inpFocus" bindinput="getInpVal"></input>
+    </view>
+    <!-- 搜索列表 -->
+    <view class="search-list" wx:if="{{inputShow}}">
+      <view class="search-list-box" bindtap="selectCity" hover-class="search-list-box-select" wx:for="{{searchList}}" wx:key="{{index}}" data-name="{{item}}">
+        <view class="search-list-box-name">{{item}}</view>
+      </view>
+    </view>
+    <view wx:if="{{!inpVal}}">
+      <!-- 定位城市 -->
+      <view class="location-city">
+        <view class="location-city-title">
+          定位城市
+        </view>
+        <view class="location-city-name" bindtap="selectCity" data-name="{{locationCity}}">
+          <image src="../../image/location.png"  mode="widthFix"></image>
+          {{locationCity}}
+        </view>
+      </view>
+      <!-- 热门城市 -->
+      <view class="hot-city">
+        <view class="hot-city-title">
+          热门城市
+        </view>
+        <view class="hot-city-name-list">
+          <view class="hot-city-name-list-box" hover-class="hot-city-name-list-box-select" bindtap="selectCity"  data-name="{{item}}"  wx:for="{{hotCity}}" wx:key="{{index}}">
+          {{item}}
+          </view>
+        </view>
+      </view>
+      <!-- 全部城市 -->
+      <view class="all-city">
+        <block wx:for="{{allCity}}" wx:key="{{index}}" wx:if="{{list.data[0]}}" wx:for-item="list">
+          <view class="all-city-letter" id="{{index===0 ? sy :list.letter}}">
+            {{list.letter}}
+          </view>
+          <view class="all-city-name" hover-class="all-city-name-select" wx:for="{{list.data}}" wx:key="{{index}}" bindtap="selectCity" data-name="{{item.cityName}}">
+            <view class="all-city-name-box {{list.data.length-1 ==index ? last :''}}" >
+              {{item.cityName}}
+            </view>
+          </view>
+        </block>
+      </view>
+    </view>
+  </scroll-view>
+  <!-- 索引 -->
+  <view class="indexes" wx:if="{{!inpVal}}" catchtouchstart="touchStart" catchtouchmove="touchMove" catchtouchend="touchEnd" catchtouchcancel="touchCancel">
+    <view class="indexes-txt" wx:for="{{allCity}}"  data-letter="{{index===0 ? '索引' : item.letter}}" wx:key="{{index}}"  data-index="{{index}}">
+      {{index===0?'索引':item.letter}}
+    </view>
+  </view>
+  <view class="maxIndexes" wx:if="{{touchmove && allCity[indexesIndex].letter}}">
+    {{allCity[indexesIndex].letter}}
+  </view>
+</view>

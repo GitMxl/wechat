@@ -1,0 +1,50 @@
+<view class="page" style="height:{{winHeight}}px">
+  <view class="search-box">
+    <icon type="search" color="white" size="16" bindtap="inpSearchIcon" ></icon>
+    <input type="text" confirm-type="search" bindtap="inpSearch" placeholder="查询城市" placeholder-class="pla" disabled value="{{inpVal}}" ></input>
+  </view>
+  <!-- 当前城市 -->
+  <view class="city-txt">{{city}}<text class="update-txt">{{update}}更新</text></view>
+  <!-- 当前温度 -->
+  <view class="temperature-txt">{{temperature}}</view>
+  <!-- 天气情况 -->
+  <view class="weather-txt">{{weather}}</view>
+  <!-- 空气质量 -->
+  <view class="air-txt"><text>{{air_level}}</text><text>{{air===0? 50: air}}</text></view>
+  <!-- 预计7天内天气 -->
+  <scroll-view class="predict-list" scroll-x>
+    <view class="predict-box" wx:for="{{predict}}" wx:key="{{index}}">
+      <view class="day-txt">
+        {{item.day}}
+      </view>
+      <view class="tem-txt">
+        {{item.tem1}}~{{item.tem2}}
+      </view>
+      <view class="wea-txt">
+        {{item.wea}}
+      </view>
+      <view class="win-txt">
+        {{item.win[0]}}{{item.win_speed}}
+      </view>
+    </view>
+  </scroll-view> 
+  <!-- 生活指数 -->
+  <scroll-view class="lives-list" scroll-y>
+    <view class="lives-box" wx:for="{{live}}" wx:key="{{index}}">
+      <view class="image-box">
+        <image src="../../image/{{index+1}}.png" mode="widthFix"></image>
+      </view>
+      <view class="lives-txt">
+        <view class="lives-txt-title" wx:if="{{item.level}}">
+          {{item.title}}   {{item.level}}
+        </view>
+        <view class="lives-txt-title" wx:else>
+          减肥指数   适宜
+        </view>
+        <view class="lives-txt-content">
+          {{item.desc}}
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>
