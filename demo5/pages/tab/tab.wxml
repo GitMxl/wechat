@@ -1,0 +1,82 @@
+<view class="page">
+  <!-- tab -->
+  <view class="tab" style="margin-top:{{height}}px">
+    <scroll-view scroll-x class="nav-tab" scroll-with-animation scroll-left="{{scrollLeft}}">
+      <view class="nav-tab-list" style="width:600px">
+        <view class="nav-tab-list-box {{current == index ? 'check' : ''}}" bindtap="tab" wx:for="{{nav}}" data-current="{{index}}" wx:key="{{index}}">
+          {{item}}
+        </view>
+      </view>
+    </scroll-view>
+    <swiper class="tab-content" current="{{current}}" bindchange="swiperReplace">
+      <swiper-item wx:for="{{content}}" wx:key="{{index}}">
+        <view wx:for="{{item.data}}" wx:for-item="list" wx:key="{{index}}" data-name="{{list.name}}" data-index="{{index}}" bindtap="showDrawer">
+          {{list.name}}
+        </view>
+      </swiper-item>
+    </swiper>
+  </view>
+  <!-- 滚动消息 -->
+  <!-- <view class="scroll-message">
+    <view class="scroll-message-box {{animation? 'scroll-animation':''}}">
+      开奖号多翻翻无可挽回反抗撒东方蓝海 考虑到后方可
+    </view>
+  </view> -->
+  <!-- 顶部导航栏 -->
+  <view class="nav-gation" style="height:{{height}}px;opacity:{{opacity}}"></view>
+  <!-- 弹窗 -->
+  <view class="drawer-box-background" hidden="{{!_showDrawer}}" bindtap="hiddenDrawer"></view>
+  <view class="drawer-box" hidden="{{!_showDrawer}}" animation="{{animationData}}">
+    <view class="drawer {{content[current].data[listIndex].checkDrawer == index? 'checkDrawer' : ''}}" catchtap="getMessage" data-index="{{index}}" wx:for="{{content[current].data[listIndex].list}}" wx:key="{{index}}">{{item}}</view>
+  </view>
+  <!-- 滑动菜单 -->
+  <view class="swiper-menu" style="transform:translate({{item.late}}rpx,0)" wx:for="{{menuList}}" wx:key="{{index}}" >
+    <view class="swiper" catchtap="gopop" catchtouchstart="touchStart" catchtouchmove="touchMove" catchtouchend="touchEnd">
+      <image class="img" src="{{item.imgSrc}}" mode="widthFix"></image>
+      <view class="text-box" bindtap="gopop">
+        <view class="text">
+          {{item.text}}
+        </view>
+        <view class="time">
+          {{item.time}}
+        </view>
+      </view>
+    </view>
+    <view class="delete-box">
+      <view class="delete" catchtap="delete" data-index="{{index}}">
+        <view>
+          删除
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!-- 手风琴 -->
+  <view class="accordion-list">
+    <view class="accordion-box" wx:for="{{accordionList}}"  wx:key="{{index}}">
+      <view class="accordion-title"bindtap="accordion" hover-class="accordion-title-hover" data-index="{{index}}">
+        <view class="accordion-title-name">
+          {{item.name}}
+        </view>
+        <view class="accordion-titlearrow">
+          >
+        </view>
+      </view>
+      <view class="accordion-content" wx:if="{{item.disabled && tapIndex  == index}}">
+        {{item.intro}}
+      </view>
+    </view>
+  </view>
+
+  <!-- 悬浮按钮 -->
+  <view class="fab-bg" wx:if="{{fabShow}}"></view>
+  <view class="fab-box" animation="{{animationDataFab}}">
+    <view class="fab" catchtap="fabtap" >+</view>
+  </view>
+  <!-- 监听显示 -->
+  <view wx:for="{{list}}" wx:key = "{{index}}" class="item item-{{index}} {{item.show ? 'show':''}}" id="{{index}}">{{item.txt}}</view>
+  
+  <view class="feend">
+    
+  </view>
+</view>

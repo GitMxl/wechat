@@ -1,0 +1,35 @@
+/* pages/tabbar/tabbar.wxss */
+.character {
+  display: block;
+  line-height: 40rpx;
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 40rpx;
+  text-align: center;
+}
+@keyframes bounce {
+  from {
+    transform: translate3d(0, 10rpx, 0);
+  }
+  to {
+    transform: translate3d(0, -25rpx, 0);
+  }
+}
+
+.bounce {
+  animation: bounce 0.4s infinite alternate;
+  font-weight: bold;
+}
+
+.cut-in{
+  --top: 102rpx;
+  --width: 100rpx;
+  --bottom: 300rpx;
+  width:  var(--width);
+  height: calc(var(--bottom));
+  transform: translate(0, var(--top));
+  float: left;
+  background: red;
+  shape-outside: polygon(0 var(--top), var(--width) var(--top), var(--width) var(--bottom), 0 var(--bottom));
+  clip-path: polygon(0 0, var(--width) 0, var(--width) calc(var(--bottom) - var(--top)), 0 calc(var(--bottom) - var(--top)));
+}

@@ -1,0 +1,21 @@
+<!--pages/showPop/showpop.wxml-->
+<view catchtap="pop">
+  <image src="../../image/1.jpg" mode="widthFix"></image>
+  <text>pop</text>
+</view>
+<view catchtap="shorage">
+  <image src="../../image/2.jpg" mode="widthFix"></image>
+  <text>shorage</text> </view>
+<view catchtap="index">
+  <image src="../../image/3.jpg" mode="widthFix"></image>
+  <text>index</text> </view>
+<view catchtap="file">
+  <image mode="widthFix" src="../../image/4.jpg"></image>
+  <text>file</text> </view>
+<view catchtap="tabbar">
+  <image mode="widthFix" src="../../image/5.jpg"></image>
+  <text>tabbar</text> </view>
+<view catchtap="tab">
+  <image mode="widthFix" src="../../image/6.jpg"></image>
+  <text>tab</text>
+</view>

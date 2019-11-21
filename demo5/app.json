@@ -1,8 +1,11 @@
 {
   "pages": [
-    "pages/file/file",
     "pages/index/index",
-    "pages/map/map"
+    "pages/tab/tab",
+    "pages/file/file",
+    "pages/map/map",
+    "pages/showpop/showpop",
+    "pages/tabbar/tabbar"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -22,20 +25,25 @@
         "text": "文件"
       },
       {
-        "pagePath":"pages/map/map",
-        "text":"地图"
+        "pagePath": "pages/map/map",
+        "text": "地图"
+      },
+      {
+        "pagePath": "pages/tab/tab",
+        "text": "TAB"
       }
     ]
   },
   "plugins": {
     "routePlan": {
-      "version": "1.0.1",
+      "version": "1.0.3",
       "provider": "wx50b5593e81dd937a"
     }
   },
   "permission": {
     "scope.userLocation": {
-      "desc": "你的位置信息将用于小程序位置接口的效果展示" 
+      "desc": "你的位置信息将用于小程序位置接口的效果展示"
     }
-  }
+  },
+  "debugger":true
 }

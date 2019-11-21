@@ -1,0 +1,4 @@
+/* pages/showPop/showpop.wxss */
+image{
+  width: 100rpx;
+}

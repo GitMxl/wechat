@@ -18,18 +18,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    wx.showNavigationBarLoading();
-    wx.showLoading({
-      title: '加载中',
-      mask: true
-    })
+    // wx.showNavigationBarLoading();
+    // wx.showLoading({
+    //   title: '加载中',
+    //   mask: true
+    // })
     let that = this;
     http.sendRrquest('https://easy-mock.com/mock/5d4bc44b5f42bd23c810ac25/shopapp/index', 'GET','', header).then(function (res) {
       if (res.data.code === 0) {
-        setTimeout(function () {
-          wx.hideNavigationBarLoading();
-          wx.hideLoading();
-        }, 1000)
+        // setTimeout(function () {
+        //   wx.hideNavigationBarLoading();
+        //   wx.hideLoading();
+        // }, 1000)
         let swiperList = res.data.data.swiperList, sortList = res.data.data.sortModle, active = res.data.data.active, recommendList = res.data.data.shop;
         let imgs = [];
         recommendList.forEach((rescomm) => {
@@ -43,7 +43,7 @@ Page({
           imgs: imgs
         })
       }
-    }, function (error) {
+    },function (err) {
       setTimeout(function () {
         wx.hideNavigationBarLoading();
         wx.hideLoading();
